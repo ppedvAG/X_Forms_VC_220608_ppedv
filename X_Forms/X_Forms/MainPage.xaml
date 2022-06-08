@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--vgl. CodeBehind-->
+
+<!--Jede XAML-Datei hat eine Root-Element, welcher die Art der UI bestimmt. Dieser muss mit der Mutterklasse im CodeBehind übereinstimmen-->
+<!--Im Root-Container werden die in diesem Dokument benutzten Namespaces definiert, sowie der Verweis auf die anhängige Klasse (CodeBehind)-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:X_Forms"
@@ -15,13 +19,14 @@
                  VerticalOptions="FillAndExpand"
                  Orientation="Vertical"
                  BackgroundColor="LightBlue"
-                 Padding="10">
+                 Padding="10, 20, 30, 40">
 
         <Label x:Name="Lbl_Output"
                HorizontalOptions="Center"
                FontSize="{StaticResource GlobalFontSize}"
                FontAttributes="Bold"
-               TextColor="Red">
+               TextColor="Red"
+               Margin="10">
             <Label.Text>
                 Hallo, ich bin ein String
             </Label.Text>
