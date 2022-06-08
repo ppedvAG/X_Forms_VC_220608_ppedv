@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:X_Forms"
              x:Class="X_Forms.Hauptseite">
-    
+
     <ContentPage.Resources>
         <x:String x:Key="BtnString">Hallo, ich bin eine Ressource</x:String>
+
+        <local:DoubleToColorConverter x:Key="double2color"/>
     </ContentPage.Resources>
-    
+
     <StackLayout x:Name="Stl_Main"
                  HorizontalOptions="FillAndExpand"
                  VerticalOptions="FillAndExpand"
@@ -56,15 +58,72 @@
             </Picker.Items>
         </Picker>
 
-
         <StackLayout x:Name="Sly_Styles">
 
             <Button Text="Style-Beispiel"
                     Style="{StaticResource Btn_Style}"
-                    BackgroundColor="LightGreen"/>
+                    BackgroundColor="LightGreen"
+                    Clicked="Button_Clicked"/>
 
         </StackLayout>
-        
+
+        <StackLayout x:Name="Sly_Binding"
+                     Orientation="Horizontal">
+
+            <Slider x:Name="Sdr_Binding" 
+                    Minimum="0" 
+                    Maximum="255"
+                    WidthRequest="250"/>
+            <BoxView HeightRequest="50"
+                     WidthRequest="50"
+                     BackgroundColor="{Binding Source={x:Reference Sdr_Binding}, Path=Value, ConverterParameter=150, Converter={StaticResource double2color}}"/>
+            <Label x:Name="Lbl_Binding" 
+                   Text="{Binding Source={x:Reference Sdr_Binding}, Path=Value, Mode=TwoWay}"/>
+
+        </StackLayout>
+
+        <StackLayout x:Name="Sly_DataBinding" Orientation="Vertical">
+
+            <StackLayout.BindingContext>
+                <local:Person Name="Rainer Zufall" Alter="35"/>
+            </StackLayout.BindingContext>
+
+            <StackLayout.Children>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding Path=Name}"
+                       WidthRequest="150"/>
+                    <Label Text="{Binding Alter, StringFormat=({0})}"/>
+                    <Button Text="Show" x:Name="Btn_Show" Clicked="Btn_Show_Clicked"/>
+                    <Button Text="Altern" x:Name="Btn_Altern" Clicked="Btn_Altern_Clicked"/>
+                </StackLayout>
+
+                <Label Text="{Binding WichtigeTage[0].Year}"/>
+
+                <ListView ItemsSource="{Binding WichtigeTage}" HeightRequest="100"
+                          x:Name="LstV_WichtigeTage">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Day}"/>
+                                    <Label Text="{Binding Month}"/>
+                                    <Label Text="{Binding Year}"/>
+                                    <Button Text="Löschen" x:Name="Btn_Delete_02" Clicked="Btn_Delete_02_Clicked"
+                                            CommandParameter="{Binding}"/>
+                                </StackLayout>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Löschen" Clicked="Btn_Delete_02_Clicked" CommandParameter="{Binding}"/>
+                                </ViewCell.ContextActions>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Text="Neuer wichtiger Tag" x:Name="Btn_Add" Clicked="Btn_Add_Clicked"/>
+                <Button Text="Lösche markierten Eintrag" x:Name="Btn_Delete" Clicked="Btn_Delete_Clicked"/>
+            </StackLayout.Children>
+
+        </StackLayout>
+
     </StackLayout>
 
 </ContentPage>

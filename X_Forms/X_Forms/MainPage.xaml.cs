@@ -12,9 +12,9 @@ namespace X_Forms
     {
         public Hauptseite()
         {
-            this.Resources["BtnString"] = "Ich bin eine neue Resource";
             InitializeComponent();
-
+            //this.Resources["BtnString"] = "Ich bin eine neue Resource";
+            
         }
 
         private void Btn_KlickMich_Clicked(object sender, EventArgs e)
@@ -37,6 +37,46 @@ namespace X_Forms
         private void Sdr_Wert_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             Sdr_Wert.Value = Math.Round(Sdr_Wert.Value);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Lbl_Binding.Text = "0";
+        }
+
+        private void Btn_Show_Clicked(object sender, EventArgs e)
+        {
+            Person person = Sly_DataBinding.BindingContext as Person;
+            DisplayAlert("Person", $"{person.Name} ({person.Alter})", "Ok");
+        }
+
+        private void Btn_Altern_Clicked(object sender, EventArgs e)
+        {
+            Person person = Sly_DataBinding.BindingContext as Person;
+            person.Alter++;
+        }
+
+        private void Btn_Add_Clicked(object sender, EventArgs e)
+        {
+            Person person = Sly_DataBinding.BindingContext as Person;
+            person.WichtigeTage.Add(DateTime.Now);
+        }
+
+        private void Btn_Delete_Clicked(object sender, EventArgs e)
+        {
+            if (LstV_WichtigeTage.SelectedItem is DateTime)
+            {
+                Person person = Sly_DataBinding.BindingContext as Person;
+                person.WichtigeTage.Remove((DateTime)LstV_WichtigeTage.SelectedItem);
+            }
+        }
+
+        private void Btn_Delete_02_Clicked(object sender, EventArgs e)
+        {
+            DateTime wichtigerTag = sender is Button ? (DateTime)(sender as Button).CommandParameter : (DateTime)(sender as MenuItem).CommandParameter;
+            Person person = Sly_DataBinding.BindingContext as Person;
+
+            person.WichtigeTage.Remove(wichtigerTag);
         }
     }
 }
