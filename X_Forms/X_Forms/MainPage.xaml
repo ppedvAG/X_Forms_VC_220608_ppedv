@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:X_Forms"
+             x:Class="X_Forms.Hauptseite">
+    
+    <ContentPage.Resources>
+        <x:String x:Key="BtnString">Hallo, ich bin eine Ressource</x:String>
+    </ContentPage.Resources>
+    
+    <StackLayout x:Name="Stl_Main"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 Orientation="Vertical"
+                 BackgroundColor="LightBlue"
+                 Padding="10">
+
+        <Label x:Name="Lbl_Output"
+               HorizontalOptions="Center"
+               FontSize="{StaticResource GlobalFontSize}"
+               FontAttributes="Bold"
+               TextColor="Red">
+            <Label.Text>
+                Hallo, ich bin ein String
+            </Label.Text>
+        </Label>
+        <Button x:Name="Btn_KlickMich"
+                Clicked="Btn_KlickMich_Clicked"
+                Text="{StaticResource BtnString}"
+                BorderWidth="2"
+                BorderColor="Green"/>
+        <ImageButton x:Name="IBtn_Beispiel"
+                     Source="test.png"
+                     BackgroundColor="Transparent"
+                     HeightRequest="50"
+                     Clicked="Btn_KlickMich_Clicked"/>
+        <Entry x:Name="Ent_Input"
+               Placeholder="Gib einen String ein"
+               Keyboard="Text"
+               Completed="Ent_Input_Completed"/>
+
+        <Slider Minimum="0"
+                Maximum="100"
+                Value="50"
+                x:Name="Sdr_Wert"
+                ValueChanged="Sdr_Wert_ValueChanged"/>
+
+        <DatePicker Format="dd.MM.yyyy"/>
+
+        <Picker x:Name="Pkr_Namen">
+            <Picker.Items>
+                <x:String>Hugo</x:String>
+                <x:String>Anna</x:String>
+                <x:String>Jürgen</x:String>
+                <x:String>Maria</x:String>
+            </Picker.Items>
+        </Picker>
+
+
+        <StackLayout x:Name="Sly_Styles">
+
+            <Button Text="Style-Beispiel"
+                    Style="{StaticResource Btn_Style}"
+                    BackgroundColor="LightGreen"/>
+
+        </StackLayout>
+        
+    </StackLayout>
+
+</ContentPage>
