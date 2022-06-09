@@ -12,6 +12,7 @@ using X_Forms.Droid.Services;
 using X_Forms.PersonenDb.Services;
 using Xamarin.Forms;
 
+//vgl. AndroidDatabaseService.cs
 [assembly: Dependency(typeof(AndroidToastService))]
 namespace X_Forms.Droid.Services
 {

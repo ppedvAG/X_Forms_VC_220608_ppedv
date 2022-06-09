@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--vgl. CodeBehind-->
-<!--vgl. MainPage.xaml-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="X_Forms.PersonenDb.Pages.Pg_Add"
              x:Name="PageAdd"
              BindingContext="{Binding Source={x:Reference PageAdd}}">
+    <!--Der BindingContext der ContextPage referenziert die ContextPage selbst, 
+    damit DataBinding an den CodeBehind möglich ist-->
 
     <StackLayout Padding="10"
                  Spacing="2">
@@ -15,7 +16,8 @@
         <Entry x:Name="Entry_Nachname" Placeholder="Nachname"
                Text="{Binding NeuePerson.Nachname}"/>
         <Button x:Name="Btn_AddPerson" Clicked="Btn_AddPerson_Clicked"  Text="Hinzufügen"/>
-
+        
+        <!--Für ListView vgl. Pg_List.xaml-->
         <ListView x:Name="LstV_Liste"
               ItemsSource="{Binding Personenliste}">
             <ListView.ItemTemplate>

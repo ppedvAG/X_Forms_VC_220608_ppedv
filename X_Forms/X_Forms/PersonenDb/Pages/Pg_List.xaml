@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--vgl. CodeBehind-->
-<!--vgl. MainPage.xaml-->
+<!--vgl. CodeBehind, vgl. Pg_Add.xaml-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="X_Forms.PersonenDb.Pages.Pg_List"
@@ -9,9 +8,11 @@
              x:Name="PageList"
              BindingContext="{Binding Source={x:Reference PageList}}">
     
+    <!--Das ListView stellt die Daten der Personenliste da-->
     <ListView x:Name="LstV_Liste"
               ItemsSource="{Binding Personenliste}">
         <ListView.ItemTemplate>
+            <!--Das DataTemplate definiert, wie die Daten aus der ItemSource-Eigenschaft angezeigt werden sollen (vgl. MainPage.xaml, Abschnitt DataBinding-->
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>

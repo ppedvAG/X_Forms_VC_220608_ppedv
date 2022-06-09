@@ -54,10 +54,12 @@
                     </Label.Text>
 
                     <Label.BackgroundColor>
+                        <!--Mittels eines OnPlattform-Objekts können Eigenschaften OS-spezifisch belegt werden-->
                         <OnPlatform x:TypeArguments="Color" Android="Yellow" iOS="Blue" Default="Green"/>
                     </Label.BackgroundColor>
 
                     <Label.TextColor>
+                        <!--Mittels eines OnIdiom-Objekts können Eigenschaften Geräte-spezifisch belegt werden-->
                         <OnIdiom x:TypeArguments="Color" Phone="Red" Desktop="Green" Watch="HotPink" Default="White"/>
                     </Label.TextColor>
                 </Label>
@@ -97,10 +99,16 @@
                 Value="50"
                 x:Name="Sdr_Wert"
                 ValueChanged="Sdr_Wert_ValueChanged"/>
-            <Stepper/>
+            <Stepper Minimum="0"
+                     Maximum="100"
+                     Value="50"
+                     Increment="1"/>
 
-            <DatePicker Format="dd.MM.yyyy"/>
+            <!--Controls zur Datums oder Zeitauswahl-->
+            <DatePicker Format="dd.MM.yyyy" Date="01.01.2002"/>
+            <TimePicker Time="01:01:01"/>
 
+            <!--Picker dienen als ItemCollections, aus denen der User einen Eintrag auswählen kann (ähnlich ComboBoxen auf Desktops)-->
             <Picker x:Name="Pkr_Namen">
                 <Picker.Items>
                     <x:String>Hugo</x:String>
@@ -133,33 +141,51 @@
                 welche die Markup-Extension beinhaltet, gilt als Target-Property-->
                 <Label x:Name="Lbl_Binding" 
                    Text="{Binding Source={x:Reference Sdr_Binding}, Path=Value, Mode=TwoWay}"/>
+                <!--Soll der Wert nicht unverandert übertragen werden oder sind die Property-Typen unterschiedlich muss ein Converter
+                zwischengeschaltet werden (vgl. DoubleToColorConverter.cs)-->
                 <BoxView HeightRequest="50"
                      WidthRequest="50"
                      BackgroundColor="{Binding Source={x:Reference Sdr_Binding}, Path=Value, ConverterParameter=150, Converter={StaticResource double2color}}"/>
 
             </StackLayout>
+
+            <!--DataBinding-->
             <StackLayout x:Name="Sly_DataBinding" Orientation="Vertical">
 
+                <!--Der BindingContext definiert den DatenHintergrund eines Controls/Containers/Page. Kurzbindungen innerhalb dieses
+                Bereichs zielen immer auf dieses Objekt. Hier wurde XAML-seitig ein Person-Objekt definiert (vgl. Person.cs)-->
                 <StackLayout.BindingContext>
                     <local:Person Name="Rainer Zufall" Alter="35"/>
                 </StackLayout.BindingContext>
 
                 <StackLayout.Children>
                     <StackLayout Orientation="Horizontal">
+                        <!--Bsp für Kurzbindungen an den BindingContext. Codeseitige Veränderungen müssen durch das Interface 
+                            INotifyPropertyChanged kommuniziert werden (vgl. Person.cs)-->
                         <Entry Text="{Binding Path=Name}"
-                       WidthRequest="150"/>
+                               WidthRequest="150"/>
                         <Label Text="{Binding Alter, StringFormat=({0})}"/>
+                        <!--Button zum Anzeigen des Personenobjekts-->
                         <Button Text="Show" x:Name="Btn_Show" Clicked="Btn_Show_Clicked"/>
+                        <!--Button zur Codeseitigen Veränderung der Person-Properties-->
                         <Button Text="Altern" x:Name="Btn_Altern" Clicked="Btn_Altern_Clicked"/>
                     </StackLayout>
-
+                    
+                    <!--Bindungen können auch tiefer in die Objektstruktur reichen-->
                     <Label Text="{Binding WichtigeTage[0].Year}"/>
 
+                    <!--Die Property 'ItemSource' verweist auf die Quelle der Items für die Liste.
+                        Hier wurde sie per Kurzbindung an die Property 'WichtigeTage' des BindingContextes 
+                        des StackLayouts angebunden (vgl. Person.cs)-->
                     <ListView ItemsSource="{Binding WichtigeTage}" HeightRequest="100"
                           x:Name="LstV_WichtigeTage">
                         <ListView.ItemTemplate>
+                            <!--Mittels DataTemplates kann das Erscheinen von einzelnen Elementen von ItemControls (hier ListView) defniert werden.
+                                DataTemplates müssen immer ein UI-Element vom Typ Cell beinhalten.-->
                             <DataTemplate>
                                 <ViewCell>
+                                    <!--Innerhalb von DataTemplates findet immer ein DataBinding an die Elemente der ItemSource statt (vgl. CodeBehind).
+                                        Dadurch finden Kurzbindungen an die Properties der Listenelemente statt.-->
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding Day}"/>
                                         <Label Text="{Binding Month}"/>
@@ -167,6 +193,7 @@
                                         <Button Text="Löschen" x:Name="Btn_Delete_02" Clicked="Btn_Delete_02_Clicked"
                                             CommandParameter="{Binding}"/>
                                     </StackLayout>
+                                    <!--ContextActions werden angezeigt, wenn der Benutzer (unter Android) länger auf eine Objekt 'touched'-->
                                     <ViewCell.ContextActions>
                                         <MenuItem Text="Löschen" Clicked="Btn_Delete_02_Clicked" CommandParameter="{Binding}"/>
                                     </ViewCell.ContextActions>
@@ -180,6 +207,7 @@
 
             </StackLayout>
 
+            <!--Verweis auf Beispiel-Layouts und -Navigation (vgl. CodeBehind, NavigationBsp und Layouts)-->
             <StackLayout Orientation="Horizontal">
                 <StackLayout.Resources>
                     <Style TargetType="Button">
@@ -191,11 +219,12 @@
                 <Button Text="TabbedPage" x:Name="Btn_NavigateToTabbed" Clicked="Btn_NavigateToTabbed_Clicked"/>
                 <Button Text="CarouselPage" x:Name="Btn_NavigateToCarousel" Clicked="Btn_NavigateToCarousel_Clicked"/>
             </StackLayout>
-            
+
         </StackLayout>
 
     </ScrollView>
 
+    <!--ToolbarItems werden permanent innerhalb der Navigationsleiste dieser Page angezeigt-->
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Liste löschen" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>

@@ -21,10 +21,12 @@ namespace X_Forms.NavigationBsp.FlyoutBsp
         {
             InitializeComponent();
 
+            //Zuordnung des BindingContexts (damit die Bindung der ListViews funktioniert)
             BindingContext = new FlyoutNavigationBspFlyoutViewModel();
             ListView = MenuItemsListView;
         }
 
+        //Genestete Klasse als Context-Objekt dieser ContextPage
         private class FlyoutNavigationBspFlyoutViewModel : INotifyPropertyChanged
         {
             public ObservableCollection<FlyoutNavigationBspFlyoutMenuItem> MenuItems { get; set; }
@@ -33,6 +35,7 @@ namespace X_Forms.NavigationBsp.FlyoutBsp
             {
                 MenuItems = new ObservableCollection<FlyoutNavigationBspFlyoutMenuItem>(new[]
                 {
+                    //Definition der beinhaltenden Menüitems, TargetType gibt die Klasse der 'neuen' Pages an
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 0, Title = "Hauptseite", TargetType=typeof(Hauptseite) },
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 1, Title = "Tabbed", TargetType=typeof(NavigationBsp.TabbedPageBsp) },
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 2, Title = "RelativeLayoutBsp", TargetType=typeof(Layouts.RelativeLayoutBsp) },

@@ -15,6 +15,8 @@ namespace X_Forms.NavigationBsp.FlyoutBsp
         public FlyoutNavigationBsp()
         {
             InitializeComponent();
+
+            //Eventzuordnung (unten stehende Methode zu ItemSelected-Event des Flyouts (vgl. FlyoutNavigationBspFlyout.xaml)
             FlyoutPage.ListView.ItemSelected += ListView_ItemSelected;
         }
 
@@ -24,9 +26,11 @@ namespace X_Forms.NavigationBsp.FlyoutBsp
             if (item == null)
                 return;
 
+            //Instanziierung der 'neuen' Page
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = item.Title;
 
+            //Aufruf der neuen Page
             Detail = new NavigationPage(page);
             IsPresented = false;
 

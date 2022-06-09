@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace X_Forms.NavigationBsp.FlyoutBsp
 {
+    //Model-Klasse für die Menüitems im Flyout-Menü (vgl. FlyoutNavigationBspFlyout.xaml)
     public class FlyoutNavigationBspFlyoutMenuItem
     {
         public FlyoutNavigationBspFlyoutMenuItem()

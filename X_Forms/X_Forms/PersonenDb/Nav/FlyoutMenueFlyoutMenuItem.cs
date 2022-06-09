@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace X_Forms.PersonenDb.Nav
+//vgl.NavigationBsp / FlyoutPageBsp/*.*
+ namespace X_Forms.PersonenDb.Nav
 {
     public class FlyoutMenueFlyoutMenuItem
     {
