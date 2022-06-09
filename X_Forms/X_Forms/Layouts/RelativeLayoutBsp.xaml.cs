@@ -19,7 +19,9 @@ namespace X_Forms.Layouts
 
         private void Btn_Box_Clicked(object sender, EventArgs e)
         {
-
+            //Bei Neuzuweisung der Constraints muss durch die Constraint-Klasse eine neue Berechnungslogik für den Wert übergeben werden.
+            //Hier: X-Position ergbit sich zukünftig aus 10% der Breite des Parents (des umgebenden RelativLayouts)
+            RelativeLayout.SetXConstraint(Bxv_Gruen, Constraint.RelativeToParent(parent => parent.Width * 0.1));
         }
     }
 }

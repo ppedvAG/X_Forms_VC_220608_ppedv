@@ -19,6 +19,8 @@ namespace X_Forms.Layouts
 
         private void Btn_Box_Clicked(object sender, EventArgs e)
         {
+            //Der Zugriff auf AttachedProperties (Eigenschaften, welche von Lyaoutcontainern an Controls verteilt werden) erfolgt über statische
+            //Methoden der Container-Klasse
             AbsoluteLayout.SetLayoutBounds(Bxv_Gruen, new Rectangle(200, 300, 200, 300));
 
             (sender as Button).Text = AbsoluteLayout.GetLayoutBounds(Bxv_Gruen).X.ToString();
