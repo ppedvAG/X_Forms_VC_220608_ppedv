@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--vgl. CodeBehind-->
+<!--vgl. MainPage.xaml-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X_Forms.PersonenDb.Pages.Pg_Add"
+             x:Name="PageAdd"
+             BindingContext="{Binding Source={x:Reference PageAdd}}">
+
+    <StackLayout Padding="10"
+                 Spacing="2">
+        <Label Text="Gib Vorname und Nachname der neuen Person an:"/>
+        <Entry x:Name="Entry_Vorname" Placeholder="Vorname"
+               Text="{Binding NeuePerson.Vorname}"/>
+        <Entry x:Name="Entry_Nachname" Placeholder="Nachname"
+               Text="{Binding NeuePerson.Nachname}"/>
+        <Button x:Name="Btn_AddPerson" Clicked="Btn_AddPerson_Clicked"  Text="Hinzufügen"/>
+
+        <ListView x:Name="LstV_Liste"
+              ItemsSource="{Binding Personenliste}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Vorname}"/>
+                            <Label Text="{Binding Nachname}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

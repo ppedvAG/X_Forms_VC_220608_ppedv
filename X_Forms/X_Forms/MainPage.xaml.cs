@@ -78,5 +78,29 @@ namespace X_Forms
 
             person.WichtigeTage.Remove(wichtigerTag);
         }
+
+        private void Btn_NavigateToGrid_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Übungen.U_GridLayout());
+        }
+
+        private void Btn_NavigateToRelativeL_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Übungen.U_RelativeLayout());
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_NavigateToTabbed_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NavigationBsp.TabbedPageBsp());
+        }
+        private void Btn_NavigateToCarousel_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NavigationBsp.CarouselPageBsp());
+        }
     }
 }

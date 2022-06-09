@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="X_Forms.NavigationBsp.CarouselPageBsp"
+            xmlns:layouts="clr-namespace:X_Forms.Layouts"
+              Title="CarouselPage">
+    <ContentPage Title="ERSTE">
+        <Label Text="Erste Seite" FontSize="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+    </ContentPage>
+    <layouts:StackLayoutBsp/>
+    <layouts:GridLayoutBsp/>
+    <layouts:AbsoluteLayoutBsp/>
+    <layouts:RelativeLayoutBsp/>
+</CarouselPage>

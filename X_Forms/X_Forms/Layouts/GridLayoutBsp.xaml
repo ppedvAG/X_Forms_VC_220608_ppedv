@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="X_Forms.Layouts.GridLayoutBsp">
+             x:Class="X_Forms.Layouts.GridLayoutBsp"
+             Title="GRID">
     <!--Das Grid ist ein Layoutcontainer, welche die Controls über Spalten und Zeilen (wie in einer Tabelle) verteilt.
     Mittels Column- und RowSpacing können die Abstände zwischen den Zeilen und Spalten angepasst werden.-->
     <Grid BackgroundColor="Black"

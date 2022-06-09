@@ -2,7 +2,8 @@
 <!--vgl. CodeBehind-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="X_Forms.Layouts.RelativeLayoutBsp">
+             x:Class="X_Forms.Layouts.RelativeLayoutBsp"
+             Title="RELATIVE">
 
     <!--In RelativeLayouts ist jedem Element eine Position relativ zum umgebenden oder anderen UI-Elemente zugeordnet-->
     <!--Den untenstehenden Constraint-Properties werden ConstraintExpressions zugeordnet, welche definieren, an welchem

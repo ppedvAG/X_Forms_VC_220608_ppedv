@@ -6,7 +6,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:X_Forms"
-             x:Class="X_Forms.Hauptseite">
+             x:Class="X_Forms.Hauptseite"
+             Title="Xamarin Forms Beispiel">
 
     <!--Jeder Container / jede Page hat eine Resource-Property, in welcher Ressourcen (Objekte, Styles, Converter, ...) für diesen 
     Container bereit gestellt werden können.-->
@@ -37,20 +38,33 @@
                 <x:String x:Key="BtnString">Ciao, ich bin eine Ressource</x:String>
             </StackLayout.Resources>
 
-            <!--Label sind Controls zur Ausgabe von Strings-->
-            <!--Einfache Property-Belegungen werden in Attribut-Form direkt in den Start-Tag geschrieben-->
-            <Label x:Name="Lbl_Output"
-               HorizontalOptions="Center"
-               FontSize="{StaticResource GlobalFontSize}"
-               FontAttributes="Bold"
-               TextColor="Red"
-               Margin="10">
+            <!--Frame ist eine grafische Umrandung-->
+            <Frame BackgroundColor="Transparent" BorderColor="Red">
+                <!--Label sind Controls zur Ausgabe von Strings-->
+                <!--Einfache Property-Belegungen werden in Attribut-Form direkt in den Start-Tag geschrieben-->
+                <Label x:Name="Lbl_Output"
+                       HorizontalOptions="Center"
+                       FontSize="{StaticResource GlobalFontSize}"
+                       FontAttributes="Bold"
+                       Margin="10">
 
-                <!--Alternativ können Eigenschaften 'ausgelagert' werden, z.B. um sie mit komplexen Objekten zu befüllen-->
-                <Label.Text>
-                    Hallo, ich bin ein String
-                </Label.Text>
-            </Label>
+                    <!--Alternativ können Eigenschaften 'ausgelagert' werden, z.B. um sie mit komplexen Objekten zu befüllen-->
+                    <Label.Text>
+                        Hallo, ich bin ein String
+                    </Label.Text>
+
+                    <Label.BackgroundColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Yellow" iOS="Blue" Default="Green"/>
+                    </Label.BackgroundColor>
+
+                    <Label.TextColor>
+                        <OnIdiom x:TypeArguments="Color" Phone="Red" Desktop="Green" Watch="HotPink" Default="White"/>
+                    </Label.TextColor>
+                </Label>
+            </Frame>
+
+            <!--BoxView als Spereator-Line-->
+            <BoxView BackgroundColor="Black" HeightRequest="2"/>
 
             <!--Buttons sind Controls, welche der User zum Auslösen von bestimmten Logiken benutzen kann-->
             <!--In XAML definierte Events benötigen einen EventHandler im CodeBehind (vgl. CodeBehind)-->
@@ -124,7 +138,6 @@
                      BackgroundColor="{Binding Source={x:Reference Sdr_Binding}, Path=Value, ConverterParameter=150, Converter={StaticResource double2color}}"/>
 
             </StackLayout>
-
             <StackLayout x:Name="Sly_DataBinding" Orientation="Vertical">
 
                 <StackLayout.BindingContext>
@@ -167,7 +180,23 @@
 
             </StackLayout>
 
+            <StackLayout Orientation="Horizontal">
+                <StackLayout.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="FontSize" Value="10"/>
+                    </Style>
+                </StackLayout.Resources>
+                <Button Text="Grid-Übung" x:Name="Btn_NavigateToGrid" Clicked="Btn_NavigateToGrid_Clicked"/>
+                <Button Text="RelativL-Übung" x:Name="Btn_NavigateToRelativeL" Clicked="Btn_NavigateToRelativeL_Clicked"/>
+                <Button Text="TabbedPage" x:Name="Btn_NavigateToTabbed" Clicked="Btn_NavigateToTabbed_Clicked"/>
+                <Button Text="CarouselPage" x:Name="Btn_NavigateToCarousel" Clicked="Btn_NavigateToCarousel_Clicked"/>
+            </StackLayout>
+            
         </StackLayout>
 
     </ScrollView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Liste löschen" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

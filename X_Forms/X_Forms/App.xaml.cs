@@ -13,9 +13,9 @@ namespace X_Forms
             InitializeComponent();
 
             //Zuweisung einer Page zu der MainPage-Property (Startseite)
-            //MainPage = new Hauptseite();
+            //MainPage = new NavigationPage(new Hauptseite());
 
-            MainPage = new Übungen.U_AbsoluteLayout();
+            MainPage = new NavigationBsp.FlyoutBsp.FlyoutNavigationBsp();
         }
 
         protected override void OnStart()
