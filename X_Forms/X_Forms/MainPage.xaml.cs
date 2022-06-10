@@ -14,6 +14,7 @@ namespace X_Forms
         //Konstruktor
         public Hauptseite()
         {
+            //Setzten der Ressourcensprache -> Bestimmt, welche resx-Bibliothek für die Lokalisierung verwendet wird
             Properties.Resources.Culture = new System.Globalization.CultureInfo("de-DE");
 
             //Initialisierung der UI (Xaml-Datei). Sollte immer erste Aktion des Konstruktors sein
@@ -22,7 +23,8 @@ namespace X_Forms
             //Neuzuweisung einer Ressource (nur DynamicResource-Bindungen reagieren auf die Veränderung
             this.Resources["BtnString"] = "Ich bin eine neue Resource";
 
-            Lbl_Battery.Text = $"{Battery.ChargeLevel * 100}% | {Battery.State}";
+            //Zugriff auf Xamarin.Essentials.Battery zur Anzeige des Batteriestandes (benötigt BatteryState-Permission)
+            Lbl_Battery.Text = $"{Battery.ChargeLevel * 100}% geladen | {Battery.State}";
 
 
         }
@@ -129,16 +131,19 @@ namespace X_Forms
 
         private async void Btn_YouTube_Clicked(object sender, EventArgs e)
         {
+            //Öffnen der Youtube-App über die Xamarin-Essentials mit Übergabe des Package-Namens
             if (await Launcher.CanOpenAsync("vnd.youtube://"))
                 await Launcher.OpenAsync("vnd.youtube://rLKnqR9Oqh8");
         }
 
+        //Bsp für Verwendung des MessagingCenters
         private void Btn_MCSender_Clicked(object sender, EventArgs e)
         {
+            //Instanzieren des Empängerobjekts
             Page page = new MCSubscriberPage();
-
+            //Senden der Nachricht mit Angabe des Senders, des Titels und des Inhalts
             MessagingCenter.Send(this, "Nachricht", Pkr_Namen.SelectedItem.ToString());
-
+            //Öffnen der Bsp-Seite
             Navigation.PushAsync(page);
         }
     }

@@ -220,8 +220,13 @@
                 <Button Text="CarouselPage" x:Name="Btn_NavigateToCarousel" Clicked="Btn_NavigateToCarousel_Clicked"/>
             </StackLayout>
 
+            <!--Label zum Anzeigen des Batterie-Status mittels Xamarin.Essentials (vgl. CodeBehind)-->
             <Label x:Name="Lbl_Battery"/>
+            <!--Beispiele für lokalisierte Beschriftungen (vgl. CodeBehind sowie Resource.resx und Resource.de.resx)-->
+            <!--Mittels der x:Static-Bindung können Properties an resx-Files gebunden werden-->
+            <!--Button zum Senden einer MC-Nachricht (vgl. CodeBehind und Pg_Subscriber.cs)-->
             <Button x:Name="Btn_YouTube" Text="{x:Static loc:Resources.Btn_Youtube_Text}" Clicked="Btn_YouTube_Clicked"/>
+            <!--Button zum Öffnen der Youtube-App-->
             <Button x:Name="Btn_MCSender" Text="{x:Static loc:Resources.Btn_MCSender_Text}" Clicked="Btn_MCSender_Clicked"/>
 
         </StackLayout>

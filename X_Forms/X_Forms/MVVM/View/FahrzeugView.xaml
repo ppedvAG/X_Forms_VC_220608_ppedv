@@ -2,31 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:X_Forms.MVVM.ViewModel"
-             xmlns:mvvm="clr-namespace:X_Forms.MVVM"
+             xmlns:conv="clr-namespace:X_Forms.MVVM.Converter"
              x:Class="X_Forms.MVVM.View.FahrzeugView"
              x:Name="Pg_FahrzeugView">
-    
+
+    <!--Im View-Teil von MVVM-Projekten werden die Fenster per XAML definiert. Diese Klassen dürfen keinen Code-Behind
+    besitzen. Diese Aufgabe wird von dem entsprechenden ViewModel übernommen, welches als BindingContext des Views gesetzt
+    wird. Dies geschieht hier innerhalb des XAML-Codes.-->
     <ContentPage.BindingContext>
         <vm:FahrzeugViewModel ContextPage="{x:Reference Pg_FahrzeugView}"/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
-        <mvvm:FahrzeugToBoolConverter x:Key="fahrzeug2bool"/>
+        <conv:FahrzeugToBoolConverter x:Key="fahrzeug2bool"/>
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout Padding="10">
+            <!--Die Eigenschaften werden über Kurzbindungen an den BindingContext (das ViewModel) gebunden.-->
             <Entry x:Name="Ent_Hersteller"
                    Text="{Binding Fahrzeughersteller}"/>
             <Entry x:Name="Ent_MaxGeschwindigkeit"
                    Text="{Binding FahrzeugMaxGeschwindigkeit}"/>
-            
+            <!--Commands erstezen die Events. CommandParameter können beliebige zusätzliche Infos enthalten,
+            welche die Commands für ihre Ausführung benötigen-->
             <Button x:Name="Btn_Add" Text="Hinzufügen"
-                    Command="{Binding HinzufuegenCmd}"
-                    CommandParameter="{x:Null}"/>
+                    Command="{Binding HinzufuegenCmd}"/>
 
+            <!--Für ListView und DataTemplate vgl. MainPage.xaml und PersonenDb/Pages/Pg_List.xaml-->
             <ListView x:Name="LstV_Fahrzeuge" VerticalOptions="FillAndExpand"
-                      ItemsSource="{Binding Fahrzeugliste}">
+                      ItemsSource="{Binding Fahrzeugliste}" SelectedItem="{Binding SelectedFahrzeug, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -40,8 +45,7 @@
             </ListView>
             <Button x:Name="Btn_Delete" Text="Löschen"
                     Command="{Binding LoeschenCmd}"
-                    CommandParameter="{Binding Source={x:Reference LstV_Fahrzeuge}, Path=SelectedItem}"
-                    IsEnabled="{Binding Source={x:Reference LstV_Fahrzeuge}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource fahrzeug2bool}}"/>
+                    CommandParameter="{Binding Source={x:Reference LstV_Fahrzeuge}, Path=SelectedItem}"/>
         </StackLayout>
 
     </ContentPage.Content>
