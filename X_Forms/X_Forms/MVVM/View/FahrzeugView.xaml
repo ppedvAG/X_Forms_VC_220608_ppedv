@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:X_Forms.MVVM.ViewModel"
+             xmlns:mvvm="clr-namespace:X_Forms.MVVM"
+             x:Class="X_Forms.MVVM.View.FahrzeugView"
+             x:Name="Pg_FahrzeugView">
+    
+    <ContentPage.BindingContext>
+        <vm:FahrzeugViewModel ContextPage="{x:Reference Pg_FahrzeugView}"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <mvvm:FahrzeugToBoolConverter x:Key="fahrzeug2bool"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Entry x:Name="Ent_Hersteller"
+                   Text="{Binding Fahrzeughersteller}"/>
+            <Entry x:Name="Ent_MaxGeschwindigkeit"
+                   Text="{Binding FahrzeugMaxGeschwindigkeit}"/>
+            
+            <Button x:Name="Btn_Add" Text="Hinzufügen"
+                    Command="{Binding HinzufuegenCmd}"
+                    CommandParameter="{x:Null}"/>
+
+            <ListView x:Name="LstV_Fahrzeuge" VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding Fahrzeugliste}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Hersteller}"/>
+                                <Label Text="{Binding MaxGeschwindigkeit}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="Btn_Delete" Text="Löschen"
+                    Command="{Binding LoeschenCmd}"
+                    CommandParameter="{Binding Source={x:Reference LstV_Fahrzeuge}, Path=SelectedItem}"
+                    IsEnabled="{Binding Source={x:Reference LstV_Fahrzeuge}, Path=SelectedItem, Mode=OneWay, Converter={StaticResource fahrzeug2bool}}"/>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

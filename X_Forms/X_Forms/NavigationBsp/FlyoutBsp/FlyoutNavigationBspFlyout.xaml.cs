@@ -40,6 +40,7 @@ namespace X_Forms.NavigationBsp.FlyoutBsp
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 1, Title = "Tabbed", TargetType=typeof(NavigationBsp.TabbedPageBsp) },
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 2, Title = "RelativeLayoutBsp", TargetType=typeof(Layouts.RelativeLayoutBsp) },
                     new FlyoutNavigationBspFlyoutMenuItem { Id = 3, Title = "PersonenDb", TargetType=typeof(PersonenDb.Nav.FlyoutMenue) },
+                    new FlyoutNavigationBspFlyoutMenuItem { Id = 4, Title = "MVVM", TargetType=typeof(MVVM.View.FahrzeugView) },
                 });
             }
 

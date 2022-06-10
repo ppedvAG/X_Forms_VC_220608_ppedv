@@ -7,7 +7,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:X_Forms"
              x:Class="X_Forms.Hauptseite"
-             Title="Xamarin Forms Beispiel">
+             Title="Xamarin Forms Beispiel"
+             xmlns:loc="clr-namespace:X_Forms.Properties">
 
     <!--Jeder Container / jede Page hat eine Resource-Property, in welcher Ressourcen (Objekte, Styles, Converter, ...) für diesen 
     Container bereit gestellt werden können.-->
@@ -124,8 +125,7 @@
                 <!--Dieser Button nimmt einen expliziten Button-Style an (vgl. RessourceDict.xaml)-->
                 <Button Text="Spezifischer Style"
                     Style="{StaticResource Btn_Style}"
-                    BackgroundColor="LightGreen"
-                    Clicked="Button_Clicked"/>
+                    BackgroundColor="LightGreen"/>
             </StackLayout>
 
             <!--Bindungen-->
@@ -219,6 +219,10 @@
                 <Button Text="TabbedPage" x:Name="Btn_NavigateToTabbed" Clicked="Btn_NavigateToTabbed_Clicked"/>
                 <Button Text="CarouselPage" x:Name="Btn_NavigateToCarousel" Clicked="Btn_NavigateToCarousel_Clicked"/>
             </StackLayout>
+
+            <Label x:Name="Lbl_Battery"/>
+            <Button x:Name="Btn_YouTube" Text="{x:Static loc:Resources.Btn_Youtube_Text}" Clicked="Btn_YouTube_Clicked"/>
+            <Button x:Name="Btn_MCSender" Text="{x:Static loc:Resources.Btn_MCSender_Text}" Clicked="Btn_MCSender_Clicked"/>
 
         </StackLayout>
 

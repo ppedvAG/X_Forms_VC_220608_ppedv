@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace X_Forms
@@ -13,12 +14,17 @@ namespace X_Forms
         //Konstruktor
         public Hauptseite()
         {
+            Properties.Resources.Culture = new System.Globalization.CultureInfo("de-DE");
+
             //Initialisierung der UI (Xaml-Datei). Sollte immer erste Aktion des Konstruktors sein
             InitializeComponent();
 
             //Neuzuweisung einer Ressource (nur DynamicResource-Bindungen reagieren auf die Veränderung
             this.Resources["BtnString"] = "Ich bin eine neue Resource";
-            
+
+            Lbl_Battery.Text = $"{Battery.ChargeLevel * 100}% | {Battery.State}";
+
+
         }
 
         //EventHandler eines Button-Click-Events (reagiert auf Button-Klick oder -Tab)
@@ -119,6 +125,21 @@ namespace X_Forms
         private void Btn_NavigateToCarousel_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new NavigationBsp.CarouselPageBsp());
+        }
+
+        private async void Btn_YouTube_Clicked(object sender, EventArgs e)
+        {
+            if (await Launcher.CanOpenAsync("vnd.youtube://"))
+                await Launcher.OpenAsync("vnd.youtube://rLKnqR9Oqh8");
+        }
+
+        private void Btn_MCSender_Clicked(object sender, EventArgs e)
+        {
+            Page page = new MCSubscriberPage();
+
+            MessagingCenter.Send(this, "Nachricht", Pkr_Namen.SelectedItem.ToString());
+
+            Navigation.PushAsync(page);
         }
     }
 }
